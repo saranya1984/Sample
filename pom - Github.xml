@@ -9,6 +9,8 @@
    
    <scm>
   <connection>scm:git:https://github.com/saranya1984/Sample.git</connection>
+  <url>scm:git:https://github.com/saranya1984/Sample.git</url>
+	<developerConnection>scm:git:https://github.com/saranya1984/Sample.git</developerConnection>
 </scm>
    
    <profile>
