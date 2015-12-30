@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.igzcode.java</groupId>
     <artifactId>Sample.git</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 	<name>Project1</name>
    
@@ -19,7 +19,7 @@
 	<url>scm:git:git@github.com:saranya1984\Sample.git</url>
 	<developerConnection>scm:git:git@github.com:saranya1984\Sample.git</developerConnection>
    
-    <tag>1.3</tag>
+    <tag>1.4</tag>
   </scm>
   
   <!--<build>
