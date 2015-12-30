@@ -17,7 +17,7 @@
 <scm>
 	<connection>scm:git:git@github.com:saranya1984\Sample.git</connection>
 	<url>scm:git:git@github.com:saranya1984\Sample.git</url>
-	<developerConnection>scm:git:git//github.com:saranya1984\Sample.git</developerConnection>
+	<developerConnection>scm:git:git@github.com:saranya1984\Sample.git</developerConnection>
    
    
     <tag>0.3</tag>
