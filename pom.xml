@@ -3,23 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>HelloWorld</groupId>
     <artifactId>HelloWorld</artifactId>
-    <version>1.0 - SNAPSHOT</version>
-	 <packaging>pom</packaging>
-    <modules>
-        <!-- Add project modules -->
-    	    	<module>Project1</module>
-			<!--	<module>OVCSOA</module>
-				<module>TechErrorNotifier</module>-->
-    </modules>
-    <!--packaging>jar</packaging>
-	<name>Project1</name-->
+    <version>1.1</version>
+
+    <!--packaging>jar</packaging-->
+	<name>Project1</name>
    
 <scm>
   <connection>scm:git:https://github.com/saranya1984/Sample.git</connection>
  <url>https://github.com/saranya1984/Sample</url>
 	<developerConnection>scm:git:https://github.com/saranya1984/Sample.git</developerConnection> 
 
-    <tag>0.5</tag>
+    <tag>1.1</tag>
   </scm>
 
 <!--<scm>
