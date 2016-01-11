@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="EA_SOA_Build"  default="replaceConfig">
+
+<property file="build-${env}.properties"/>
+	
+	<target name="replaceConfig">
+	
+		<echo>Replacing tokens in configuration file</echo>
+		
+		<!-- Following logic copies the dev deployment plan and generates one to meet the target environment. -->
+		<!--delete failonerror="true" file="${fmw.app.basedir}/${fmw.composite.name}/${fmw.composite.name}_cfgplan_generated.xml"/-->
+		<copy overwrite="true" failonerror="true" 
+			file  ="${fmw.app.basedir}/${fmw.composite.name}/${fmw.composite.name}_cfgplan.xml" 
+			tofile="${configplan.target.path}/${fmw.composite.name}_cfgplan_generated.xml"/>
+			
+			<replace file="${fmw.app.basedir}/${fmw.composite.name}/${fmw.composite.name}_cfgplan_generated.xml"> 
+			  
+			  <replacefilter token="http://vmohsmnhm044.oracleoutsourcing.com:42712/soa-infra/services/Framework" value="http://${callback.server.url}/soa-infra/services/Framework" />
+			  <replacefilter token="http://vmohsmnhm044.oracleoutsourcing.com:42712/soa-infra/services/OVC" value="http://${callback.server.url}/soa-infra/services/${list.component.partition}" />
+			   <replacefilter token="http://vmohsmnhm092.oracleoutsourcing.com:43714/GetRep?wsdl" value="http://${callback.server.osburl}/GetRep?wsdl" />
+			  <replacefilter token="/dmnh2o/shared/" value="${file.shared.location}"/> 
+			  <replacefilter token="&gt;DEV&lt;" value="&gt;${environment}&lt;"/>
+		</replace>
+		
+		<replace token="/dmnh2o/shared/" value="${file.shared.location}"> 
+		  <fileset dir="${fmw.app.basedir}/${fmw.composite.name}/SOA">
+			<include name="composite.xml"/>
+		  </fileset>
+		</replace>
+		
+		<replace token="&gt;DEV&lt;" value="&gt;${environment}&lt;"> 
+		  <fileset dir="${fmw.app.basedir}/${fmw.composite.name}/SOA">
+			<include name="composite.xml"/>
+		  </fileset>
+		</replace>
+		
+		<replace token="man.ovc.ebiz2.input" value="${ovc.queue}"> 
+		  <fileset dir="${fmw.app.basedir}/${fmw.composite.name}/SOA/Adapters">
+			<include name="**/*.jca"/>
+		  </fileset>
+		</replace>
+		
+	</target>
+
+</project>

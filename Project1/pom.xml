@@ -23,67 +23,226 @@
         <artifactId>sar-common</artifactId>
         <version>12.1.3-0-0</version>
     </parent>
+	
+	<scm>
+  <connection>scm:git:https://github.com/saranya1984/Sample.git</connection>
+ <url>https://github.com/saranya1984/Sample</url>
+	<developerConnection>scm:git:https://github.com/saranya1984/Sample.git</developerConnection> 
+
+ 
+  </scm>
     
-    <properties>
-        <!-- These parameters are used by the compile goal -->
-        <scac.input.dir>${project.basedir}\SOA/</scac.input.dir>
-        <scac.output.dir>${project.basedir}/target</scac.output.dir>
-        <scac.input>${scac.input.dir}/composite.xml</scac.input>
-        <scac.output>${scac.output.dir}/out.xml</scac.output>
-        <scac.error>${scac.output.dir}/error.txt</scac.error>
-        <scac.displayLevel>1</scac.displayLevel>
-        <!-- if you are using a config plan, uncomment the following line and update to point
-             to your config plan -->
-        <!--<configplan>${scac.input.dir}/configplan.xml</configplan>-->
-        
-        <!-- These parameters are used by the deploy and undeploy goals --> 
-        <composite.name>${project.artifactId}</composite.name>
-        <composite.revision>1.0</composite.revision>
-        <composite.partition>default</composite.partition>        
-        <serverUrl>${oracleServerUrl}</serverUrl>        
-        <user>${oracleUsername}</user>
-        <password>${oraclePassword}</password>
-        <overwrite>true</overwrite>
-        <forceDefault>true</forceDefault>
-        <regenerateRulebase>false</regenerateRulebase>
-        <keepInstancesOnRedeploy>false</keepInstancesOnRedeploy>
-        
-        <!-- These parameters are used by the test goal 
+   <properties>
+      <!--These parameters are used by the compile goal-->
+      <!--<scac.input.dir>${project.basedir}\SOA/</scac.input.dir>
+      <scac.output.dir>${project.basedir}/target</scac.output.dir>
+      <scac.input>${scac.input.dir}/composite.xml</scac.input>
+      <scac.output>${scac.output.dir}/out.xml</scac.output>
+      <scac.error>${scac.output.dir}/error.txt</scac.error>
+      <scac.displayLevel>1</scac.displayLevel>-->
+	    <code.basedir>${soa.app.source}/${project.artifactId}</code.basedir>
+	  <adf.base.dir>${code.basedir}</adf.base.dir>
+      <scac.input.dir>${code.basedir}\SOA/</scac.input.dir>
+      <scac.output.dir>${basedir}/target</scac.output.dir>
+      <scac.input>${scac.input.dir}/composite.xml</scac.input>
+      <scac.output>${scac.output.dir}/out.xml</scac.output>
+      <scac.error>${scac.output.dir}/error.txt</scac.error>
+      <scac.displayLevel>1</scac.displayLevel>
+      <!--if you are using a config plan, uncomment the following line and update to point
+             to your config plan>-->
+     <!-- <configplan>${scac.input.dir}/${project.artifactId}_cfgplan_generated.xml</configplan>-->
+	  
+      <!--These parameters are used by the deploy and undeploy goals-->
+      <composite.name>${project.artifactId}</composite.name>
+      <composite.revision>${project.version}</composite.revision>
+      <composite.partition>Framework</composite.partition>
+     <!-- <serverUrl>http://localhost:7001</serverUrl>
+      <user>weblogic</user>
+      <password>weblogic1</password>-->
+      <overwrite>true</overwrite>
+      <forceDefault>true</forceDefault>
+      <regenerateRulebase>false</regenerateRulebase>
+      <keepInstancesOnRedeploy>false</keepInstancesOnRedeploy>
+	  
+      <!--These parameters are used by the test goal 
          if you are using the sca-test (test) goal, you need to uncomment the following
-             line and point it to your jndi.properties file. --> 
-             
-        <!--<jndi.properties.input>UNDEFINED</jndi.properties.input>-->
-        <scatest.result>${scac.output.dir}/testResult</scatest.result>
-        <!--  input is the name of the composite to run test suties against -->
-        <input>${project.artifactId}</input>
-        
-        <!--<scac.ant.buildfile>${env.MW_HOME}/soa/bin/ant-sca-compile.xml</scac.ant.buildfile>
-        <sca.ant.testfile>${env.MW_HOME}/soa/bin/ant-sca-test.xml</sca.ant.testfile>
-        -->
-        
-    </properties>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.oracle.soa.plugin</groupId>
-                <artifactId>oracle-soa-plugin</artifactId>
-                <version>12.1.3-0-0</version>
-                <configuration>
-                    <compositeName>${project.artifactId}</compositeName>
-                    <composite>${scac.input}</composite>
-                    <sarLocation>${scac.output.dir}/sca_${project.artifactId}_rev${composite.revision}.jar</sarLocation>
-                    <serverUrl>${serverUrl}</serverUrl>
-                    <user>${user}</user>
-                    <password>${password}</password>
-                    <!-- Note: compositeRevision is needed to package, revision is needed to undeploy -->
-                    <compositeRevision>${composite.revision}</compositeRevision>
-                    <revision>${composite.revision}</revision>
-                    <scacInputDir>${scac.input.dir}</scacInputDir>                    
-                    <input>${input}</input> 
-                </configuration>
-                 <!-- extensions=true is needed to use the custom sar packaging type -->
-                <extensions>true</extensions>
-            </plugin>
-        </plugins>
-    </build>
+             line and point it to your jndi.properties file.-->
+      <jndi.properties.input>jndi.properties</jndi.properties.input>
+      <scatest.result>${scac.output.dir}/testResult</scatest.result>
+      <!--input is the name of the composite to run test suties against-->
+      <input>${project.artifactId}</input>
+      <!--<scac.ant.buildfile>${env.MW_HOME}/soa/bin/ant-sca-compile.xml</scac.ant.buildfile>
+        <sca.ant.testfile>${env.MW_HOME}/soa/bin/ant-sca-test.xml</sca.ant.testfile>-->
+   </properties>
+   
+	<build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>Test-compile</id>
+                  <goals>
+                     <goal>compile</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+		 
+		 
+		 
+<!-- Ant plugin to run the ANT acripts-->
+			<!--plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>read-input</id>
+						<phase>prepare-package</phase>
+						<inherited>false</inherited>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+								<target>
+							
+				
+									<property name="fmw.app.basedir" value="${soa.app.source}" />
+									<property name="fmw.composite.name" value="${project.artifactId}" />
+									<property name="configplan.target.path" value="${scac.output.dir}" />
+									<ant antfile="${project.basedir}/replace-tokens.xml" target="replaceConfig" />
+								</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin-->
+         <plugin>
+            <groupId>com.oracle.soa.plugin</groupId>
+            <artifactId>oracle-soa-plugin</artifactId>
+            <version>12.1.3-0-0</version>
+            <configuration>
+               <compositeName>${project.artifactId}</compositeName>
+               <composite>${scac.input}</composite>
+               <sarLocation>${scac.output.dir}/sca_${project.artifactId}_rev${composite.revision}.jar</sarLocation>
+			   
+               <serverUrl>${serverUrl}</serverUrl>
+               <user>${user}</user>
+               <password>${password}</password>
+			   <partition>Framework</partition>
+               <!--Note: compositeRevision is needed to package, revision is needed to undeploy-->
+               <compositeRevision>${composite.revision}</compositeRevision>
+               <revision>${composite.revision}</revision>
+               <scacInputDir>${scac.input.dir}</scacInputDir>
+               <input>${input}</input>
+            <!--   <appHome>${project.basedir}/..</appHome>
+			   <configplan>${project.basedir}/${project.artifactId}_cfgplan_generated.xml</configplan>-->
+			   <appHome>${adf.base.dir}</appHome>
+					<!--<configplan>${scac.output.dir}/${composite.name}_cfgplan_generated.xml</configplan>-->
+               <ignoreErrors>true</ignoreErrors>
+            </configuration>
+            <!--extensions=true is needed to use the custom sar packaging type-->
+            <extensions>true</extensions>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0-alpha-1</version>
+            <executions>
+               <execution>
+                  <phase>initialize</phase>
+                  <goals>
+                     <goal>read-project-properties</goal>
+                  </goals>
+                  <configuration>
+                    <!-- <files>
+                        <file>${project.basedir}\../OVCApp.properties</file>
+                     </files>-->
+					  <files>
+						<!--<file>build-${env}.properties</file>-->
+						 <file>build-${env}.properties</file>
+					  </files>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+      <sourceDirectory>SOA/SCA-INF/src/</sourceDirectory>
+      <outputDirectory>SOA/SCA-INF/classes/</outputDirectory>
+      <pluginManagement>
+         <plugins/>
+      </pluginManagement>
+   </build>
+   <dependencies>
+  <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.7.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant-launcher</artifactId>
+            <version>1.7.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant-nodeps</artifactId>
+            <version>1.7.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant-apache-bsf</artifactId>
+            <version>1.7.1</version>
+          </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>SOA-Designtime</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>SOA-Runtime</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>BPEL-Runtime</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>Mediator-Runtime</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>MDS-Runtime</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>BC4J-Service-Runtime</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle.adf.library</groupId>
+         <artifactId>Spring</artifactId>
+         <version>12.1.3-0-0</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>
+	
+   </dependencies>
 </project>

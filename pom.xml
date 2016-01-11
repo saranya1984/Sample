@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.igzcode.java</groupId>
-    <artifactId>Sample.git</artifactId>
-    <version>0.7-SNAPSHOT</version>
-    <packaging>jar</packaging>
-	<name>Project1</name>
+    <groupId>HelloWorld</groupId>
+    <artifactId>HelloWorld</artifactId>
+    <version>1.0 - SNAPSHOT</version>
+	 <packaging>pom</packaging>
+    <modules>
+        <!-- Add project modules -->
+    	    	<module>Project1</module>
+			<!--	<module>OVCSOA</module>
+				<module>TechErrorNotifier</module>-->
+    </modules>
+    <!--packaging>jar</packaging>
+	<name>Project1</name-->
    
 <scm>
   <connection>scm:git:https://github.com/saranya1984/Sample.git</connection>
@@ -158,5 +165,7 @@
      </plugin>
     </plugins>
    </build>
+  
+ 
   
 </project>
