@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.igzcode.java</groupId>
     <artifactId>Sample.git</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.4</version>
     <packaging>jar</packaging>
 	<name>Project1</name>
    
@@ -12,7 +12,7 @@
  <url>https://github.com/saranya1984/Sample</url>
 	<developerConnection>scm:git:https://github.com/saranya1984/Sample.git</developerConnection> 
 
-    <tag>HEAD</tag>
+    <tag>0.5</tag>
   </scm>
 
 <!--<scm>
