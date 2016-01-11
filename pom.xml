@@ -158,5 +158,19 @@
      </plugin>
     </plugins>
    </build>
+   <distributionManagement>
+    <!-- use the following if you're not using a snapshot version. -->
+    <repository>
+      <id>dev</id>
+      <name>dev repository</name>
+      <url>http://localhost:8088/repository/dev-group</url>
+    </repository>
+    <!-- use the following if you ARE using a snapshot version. -->
+   <!-- <snapshotRepository>
+      <id>localSnapshot</id>
+      <name>local snapshot repository</name>
+      <url>file:///home/mark/.m2/repository</url>
+    </snapshotRepository> -->
+  </distributionManagement>
   
 </project>
