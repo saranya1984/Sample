@@ -4,7 +4,7 @@
     <groupId>Sample</groupId>
     <artifactId>Sample</artifactId>
     <version>0.7-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 	<name>Project1</name>
    
 <scm>
@@ -15,6 +15,13 @@
     <tag>0.5</tag>
   </scm>
 
+  <modules>
+        <!-- Add project modules -->
+    	    	<module>Project1</module>
+			<!--	<module>OVCSOA</module>
+				<module>TechErrorNotifier</module>-->
+    </modules>
+  
 <!--<scm>
 	<connection>scm:git:git@github.com:saranya1984\Sample.git</connection>
 	<url>scm:git:git@github.com:saranya1984\Sample.git</url>
