@@ -160,11 +160,11 @@
    </build>
    <distributionManagement>
     <!-- use the following if you're not using a snapshot version. -->
-    <repository>
+  <!--  <repository>
       <id>dev</id>
       <name>dev repository</name>
       <url>http://localhost:8088/repository/dev</url>
-    </repository>
+    </repository> -->
     <!-- use the following if you ARE using a snapshot version. -->
    <!-- <snapshotRepository>
       <id>localSnapshot</id>
