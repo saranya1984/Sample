@@ -29,8 +29,6 @@
  <url>https://github.com/saranya1984/Sample</url>
 	<developerConnection>scm:git:https://github.com/saranya1984/Sample.git</developerConnection> 
 
- 
-    <tag>1.1</tag>
   </scm>
     
    <properties>
@@ -41,6 +39,8 @@
       <scac.output>${scac.output.dir}/out.xml</scac.output>
       <scac.error>${scac.output.dir}/error.txt</scac.error>
       <scac.displayLevel>1</scac.displayLevel>-->
+	  <github.global.server>github</github.global.server>
+		<project.build.directory>C:/JDeveloper/mywork/OVC_POCs/Project1/Sample</project.build.directory>
 	    <code.basedir>${soa.app.source}/${project.artifactId}</code.basedir>
 	  <adf.base.dir>${code.basedir}</adf.base.dir>
       <scac.input.dir>${code.basedir}\SOA/</scac.input.dir>
@@ -167,6 +167,38 @@
                </execution>
             </executions>
          </plugin>
+		 <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.8.1</version>
+        <configuration>
+            <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/ovc-maven-repo</altDeploymentRepository>
+        </configuration>
+    </plugin>
+	 <plugin>
+      <groupId>com.github.github</groupId>
+      <artifactId>site-maven-plugin</artifactId>
+      <version>0.12</version>
+      <configuration>
+      
+       <message>Official ${project.name} build</message>
+	    <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+                <outputDirectory>${project.build.directory}/ovc-maven-repo</outputDirectory> <!-- matches distribution management repository url above -->
+	   <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+                <includes><include>**/*</include></includes>
+                <merge>true</merge> 
+       
+       <repositoryName>Sample</repositoryName>
+       <repositoryOwner>saranya1984</repositoryOwner>
+      </configuration>
+      <executions>
+       <execution>
+        <goals>
+         <goal>site</goal>
+        </goals>
+        <phase>deploy</phase>
+       </execution>
+      </executions>
+     </plugin>
       </plugins>
       <sourceDirectory>SOA/SCA-INF/src/</sourceDirectory>
       <outputDirectory>SOA/SCA-INF/classes/</outputDirectory>
@@ -246,4 +278,21 @@
       </dependency>
 	
    </dependencies>
+    <repositories>
+    <repository>
+            <id>github.com</id>
+           <url>https://github.com/saranya1984/Sample/mvn-repo/</url>
+         <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+        </snapshots>
+          </repository>
+		</repositories>
+   <distributionManagement>
+    <repository>
+        <id>github</id>
+       <name>Temporary Staging Repository</name>
+        <url>file://${project.build.directory}/ovc-maven-repo</url>
+    </repository>
+</distributionManagement>
 </project>
