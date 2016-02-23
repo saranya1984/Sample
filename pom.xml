@@ -15,13 +15,7 @@
     <tag>0.5</tag>
   </scm>
 
-  <modules>
-        <!-- Add project modules -->
-    	    	<module>Project1</module>
-			<!--	<module>OVCSOA</module>
-				<module>TechErrorNotifier</module>-->
-    </modules>
-  
+ 
 <!--<scm>
 	<connection>scm:git:git@github.com:saranya1984\Sample.git</connection>
 	<url>scm:git:git@github.com:saranya1984\Sample.git</url>
@@ -166,6 +160,15 @@
     </plugins>
    </build>
    <distributionManagement>
+  
+    <!-- use the following if you're not using a snapshot version. -->
+	
+	  <repository>
+            <id>dev</id>
+            <layout>default</layout>
+            <url>http://localhost:8088/repository/dev</url>
+          </repository>
+
     <!-- use the following if you're not using a snapshot version. -->
   <!--  <repository>
       <id>dev</id>
